@@ -18,7 +18,7 @@ RUN apt install curl
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' && \
     apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 && \
     curl -sSL 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC1CF6E31E6BADE8868B172B4F42ED6FBAB17C654' | apt-key add - && \
-    # try to fix broken hash dum mismatch for binfmt-support_2.1.6-1_amd64.deb
+    # fix broken hash dum mismatch for binfmt-support_2.1.6-1_amd64.deb
     echo "Acquire::By-Hash \"yes\"; ">/etc/apt/apt.conf.d/01byhash && \
     apt update && \
     apt install -y ros-kinetic-ros-base
@@ -27,7 +27,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
 RUN rosdep init
 
 # setup python development packages
-RUN curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
     apt install -y \
         nodejs \
         python-rosinstall \
